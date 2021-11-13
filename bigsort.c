@@ -6,26 +6,11 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 16:56:29 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 18:30:25 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 20:35:39 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// static void	sort_three(t_stacks *stack)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (++i < 2 && !is_ordered(stack->a, stack->size_a))
-// 	{
-// 		if (stack->a[0] > stack->a[1])
-// 			swap_a(stack);
-// 		else if (stack->a[stack->size_a - 2] > stack->a[stack->size_a - 1]
-// 			|| stack->a[0] > stack->a[stack->size_a - 1])
-// 			rev_rotate_a(stack);
-// 	}
-// }
 
 static void	fill_b(int *markup, t_stacks *stack)
 {
@@ -44,30 +29,77 @@ static void	fill_b(int *markup, t_stacks *stack)
 	free(markup);
 }
 
-void	bigsort(t_stacks *stack)
+static int	*markup_b(t_stacks *stack)
 {
+	int	i;
+	int	pos;
 	int	*markup;
-	int	pos_a;
 
-	display_stacks(stack);
-	markup = best_markup_a(stack);
-	display_markup(markup, stack);
-	fill_b(markup, stack);
-	display_stacks(stack);
+	markup = malloc(stack->size_b * sizeof(*markup));
+	if (markup == 0)
+		return (0);
+	i = -1;
+	while (++i < stack->size_b)
+	{
+		if (i < stack->size_b / 2)
+			markup[i] = i;
+		else
+			markup[i] = stack->size_b - i;
+		pos = find_position(stack->b[i], stack);
+		if (pos > stack->size_a / 2)
+			pos = stack->size_a - pos;
+		markup[i] += pos;
+	}
+	return (markup);
+}
+
+static int	find_min_index(int *stack, int size)
+{
+	int	i;
+	int	best_i;
+	int	best_score;
+	int	min;
+
+	min = find_min(stack, size);
+	i = index_elem(min, stack, size);
+	best_i = i;
+	best_score = i;
+	while (++i < size)
+	{
+		if (stack[i] == min && size - i < best_score)
+		{
+			best_i = i;
+			best_score = size - i;
+		}
+	}
+	return (best_i);
+}
+
+void	bigsort(t_stacks *stack, int *markup)
+{
+	int	pos_a;
+	int	pos_b;
+
+	fill_b(best_markup_a(stack), stack);
 	while (stack->size_b > 0)
 	{
-		pos_a = find_position(stack->b[0], stack);
-		if (pos_a == 0)
+		markup = markup_b(stack);
+		pos_b = find_min_index(markup, stack->size_b);
+		pos_a = find_position(stack->b[pos_b], stack);
+		if (pos_a == 0 && pos_b == 0)
 			push_a(stack);
-		else if (pos_a < stack->size_a - pos_a)
+		if (pos_a != 0 && pos_a < stack->size_a - pos_a)
 			rotate_a(stack);
-		else
+		else if (pos_a != 0)
 			rev_rotate_a(stack);
+		if (pos_b != 0 && pos_b < stack->size_b - pos_b)
+			rotate_b(stack);
+		else if (pos_b != 0)
+			rev_rotate_b(stack);
+		free(markup);
 	}
-	display_stacks(stack);
 	while (!is_sorted(stack) && !use_rev_rotation(stack))
 		rotate_a(stack);
 	while (!is_sorted(stack) && use_rev_rotation(stack))
 		rev_rotate_a(stack);
-	display_stacks(stack);
 }

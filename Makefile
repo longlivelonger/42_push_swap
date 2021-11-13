@@ -5,8 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = push_swap.c input.c utils.c sort_utils.c \
 		minisort.c bigsort.c operations.c operations2.c \
-		markup_a.c \
-		debug.c # delete
+		markup_a.c
 
 RM = rm -rf
 

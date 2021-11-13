@@ -6,7 +6,7 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:23:55 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 15:58:24 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 20:12:08 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	push_a(t_stacks *stack)
 	i = -1;
 	while (++i < stack->size_b)
 		stack->b[i] = stack->b[i + 1];
-	write(1, "pa\n", 3);
 	append_operation(pa, stack);
 }
 
@@ -42,7 +41,6 @@ void	push_b(t_stacks *stack)
 	i = -1;
 	while (++i < stack->size_a)
 		stack->a[i] = stack->a[i + 1];
-	write(1, "pb\n", 3);
 	append_operation(pb, stack);
 }
 
@@ -53,7 +51,6 @@ void	swap_a(t_stacks *stack)
 	temp = stack->a[0];
 	stack->a[0] = stack->a[1];
 	stack->a[1] = temp;
-	write(1, "sa\n", 3);
 	append_operation(sa, stack);
 }
 
@@ -64,7 +61,6 @@ void	swap_b(t_stacks *stack)
 	temp = stack->b[0];
 	stack->b[0] = stack->b[1];
 	stack->b[1] = temp;
-	write(1, "sb\n", 3);
 	append_operation(sb, stack);
 }
 
@@ -78,6 +74,5 @@ void	rev_rotate_a(t_stacks *stack)
 	while (++i < stack->size_a - 1)
 		stack->a[stack->size_a - i - 1] = stack->a[stack->size_a - i - 2];
 	stack->a[0] = temp;
-	write(1, "rra\n", 4);
 	append_operation(rra, stack);
 }

@@ -6,7 +6,7 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 18:13:33 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 19:04:34 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 20:26:39 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,5 @@ int	*best_markup_a(t_stacks *stack)
 		}
 		free(markup);
 	}
-	display_num(best_head);
 	return (markup_a(best_head, stack));
 }
