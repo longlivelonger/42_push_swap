@@ -3,7 +3,8 @@ NAME = push_swap
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = push_swap.c input.c utils.c minisort.c operations.c operations2.c
+SRC = push_swap.c input.c utils.c sort_utils.c \
+		minisort.c operations.c operations2.c
 
 RM = rm -rf
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbronwyn <sbronwyn@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:28:00 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/09 17:22:13 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 15:14:27 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_stacks	*stacks;
+	t_stacks	*stack;
 
 	if (argc <= 1)
 		return (EXIT_FAILURE);
-	stacks = create_stacks(argc - 1, argv);
-	order_input(stacks);
-	if (is_sorted(stacks))
+	stack = create_stacks(argc - 1, argv);
+	if (has_duplicates(stack))
+		return (EXIT_FAILURE);
+	order_input(stack);
+	if (is_sorted(stack))
 		return (EXIT_SUCCESS);
 	if (argc - 1 <= 5)
-		minisort(stacks);
+		minisort(stack);
 	return (EXIT_SUCCESS);
 }

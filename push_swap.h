@@ -6,7 +6,7 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:28:00 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/09 19:11:35 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 16:52:48 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,51 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef enum e_ops
+{
+	pa,
+	pb,
+	sa,
+	sb,
+	rra,
+	rrb,
+	ra
+}	t_ops;
+
 typedef struct s_stacks
 {
-	int	*a;
-	int	*b;
-	int	size_a;
-	int	size_b;
+	int		*a;
+	int		*b;
+	int		size_a;
+	int		size_b;
+	t_ops	*ops;
+	int		size_ops;
 }	t_stacks;
 
 t_stacks	*create_stacks(int size, char **numbers);
-void		order_input(t_stacks *stacks);
+void		order_input(t_stacks *stack);
+int			has_duplicates(t_stacks *stack);
 
 int			is_sorted(t_stacks *stacks);
 int			is_sequential(t_stacks *stacks);
+int			find_min(int *stack, int size);
+int			find_max(int *stack, int size);
+void		append_operation(t_ops operation, t_stacks *stack);
+
+int			is_ordered(int *stack, int size);
+int			index_elem(int elem, int *stack, int size);
+int			use_rev_rotation(t_stacks *stack);
+int			find_position(int elem, t_stacks *stack);
 
 void		minisort(t_stacks *stack);
 
-void		push_a(t_stacks *stacks);
-void		push_b(t_stacks *stacks);
+void		push_a(t_stacks *stack);
+void		push_b(t_stacks *stack);
 void		swap_a(t_stacks *stack);
 void		swap_b(t_stacks *stack);
-void		rev_rotate_a(t_stacks *stacks);
+void		rev_rotate_a(t_stacks *stack);
 
-void		rev_rotate_b(t_stacks *stacks);
-void		rotate_a(t_stacks *stacks);
+void		rev_rotate_b(t_stacks *stack);
+void		rotate_a(t_stacks *stack);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbronwyn <sbronwyn@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 16:32:53 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/09 17:05:23 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 15:59:05 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,26 @@ static int	ft_atoi(const char *str)
 
 t_stacks	*create_stacks(int size, char **numbers)
 {
-	t_stacks	*stacks;
+	t_stacks	*stack;
 	int			i;
 
-	stacks = malloc(sizeof(*stacks));
-	if (stacks == 0)
+	stack = malloc(sizeof(*stack));
+	if (stack == 0)
 		return (0);
-	stacks->size_a = size;
-	stacks->size_b = 0;
-	stacks->a = malloc(size * sizeof(stacks->a));
-	if (stacks->a == 0)
+	stack->ops = 0;
+	stack->size_ops = 0;
+	stack->size_a = size;
+	stack->size_b = 0;
+	stack->a = malloc(size * sizeof(stack->a));
+	if (stack->a == 0)
 		return (0);
-	stacks->b = malloc(size * sizeof(stacks->b));
-	if (stacks->b == 0)
+	stack->b = malloc(size * sizeof(stack->b));
+	if (stack->b == 0)
 		return (0);
 	i = -1;
 	while (++i < size)
-		stacks->a[i] = ft_atoi(numbers[i + 1]);
-	return (stacks);
+		stack->a[i] = ft_atoi(numbers[i + 1]);
+	return (stack);
 }
 
 static void	sort_input(int *stack, int *seq, int size)
@@ -90,20 +92,36 @@ static void	sort_input(int *stack, int *seq, int size)
 	}
 }
 
-void	order_input(t_stacks *stacks)
+void	order_input(t_stacks *stack)
 {
 	int	*seq;
 	int	i;
 
-	seq = malloc(stacks->size_a * sizeof(*seq));
+	seq = malloc(stack->size_a * sizeof(*seq));
 	if (seq == 0)
 		return ;
 	i = -1;
-	while (++i < stacks->size_a)
+	while (++i < stack->size_a)
 		seq[i] = i;
-	sort_input(stacks->a, seq, stacks->size_a);
+	sort_input(stack->a, seq, stack->size_a);
 	i = -1;
-	while (++i < stacks->size_a)
-		stacks->a[seq[i]] = i;
+	while (++i < stack->size_a)
+		stack->a[seq[i]] = i;
 	free(seq);
+}
+
+int	has_duplicates(t_stacks *stack)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < stack->size_a)
+	{
+		j = i;
+		while (++j < stack->size_a)
+			if (stack->a[i] == stack->a[j])
+				return (1);
+	}
+	return (0);
 }
