@@ -6,7 +6,7 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:28:00 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 15:14:27 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 16:57:45 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ int	main(int argc, char **argv)
 		return (EXIT_SUCCESS);
 	if (argc - 1 <= 5)
 		minisort(stack);
+	else
+		bigsort(stack);
 	return (EXIT_SUCCESS);
 }

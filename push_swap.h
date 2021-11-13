@@ -6,7 +6,7 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:28:00 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 16:52:48 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 18:16:13 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ typedef struct s_stacks
 	int		size_ops;
 }	t_stacks;
 
+void	display_stacks(t_stacks *stack);// delete
+void	display_markup(int *markup, t_stacks *stack);
+void	display_num(int num);
+
 t_stacks	*create_stacks(int size, char **numbers);
 void		order_input(t_stacks *stack);
 int			has_duplicates(t_stacks *stack);
@@ -52,7 +56,10 @@ int			index_elem(int elem, int *stack, int size);
 int			use_rev_rotation(t_stacks *stack);
 int			find_position(int elem, t_stacks *stack);
 
+int			*best_markup_a(t_stacks *stack);
+
 void		minisort(t_stacks *stack);
+void		bigsort(t_stacks *stack);
 
 void		push_a(t_stacks *stack);
 void		push_b(t_stacks *stack);
