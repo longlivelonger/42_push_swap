@@ -6,7 +6,7 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:28:00 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 20:34:04 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 20:43:40 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,21 @@ void	print_operations(t_stacks *stack)
 	}
 }
 
+int	display_error(void)
+{
+	write(2, "Error\n", 6);
+	return (EXIT_FAILURE);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stacks	*stack;
 
 	if (argc <= 1)
-		return (EXIT_FAILURE);
+		return (display_error());
 	stack = create_stacks(argc - 1, argv);
 	if (has_duplicates(stack))
-		return (EXIT_FAILURE);
+		return (display_error());
 	order_input(stack);
 	if (is_sorted(stack))
 		return (EXIT_SUCCESS);

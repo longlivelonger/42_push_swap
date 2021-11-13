@@ -6,7 +6,7 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 14:28:00 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 20:34:00 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 20:45:57 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void		rev_rotate_a(t_stacks *stack);
 void		rev_rotate_b(t_stacks *stack);
 void		rotate_a(t_stacks *stack);
 void		rotate_b(t_stacks *stack);
+
+int			display_error(void);
 
 #endif

@@ -6,17 +6,18 @@
 /*   By: sbronwyn <sbronwyn@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 16:32:53 by sbronwyn          #+#    #+#             */
-/*   Updated: 2021/11/13 15:59:05 by sbronwyn         ###   ########.fr       */
+/*   Updated: 2021/11/13 21:05:52 by sbronwyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <limits.h>
 
 static int	ft_atoi(const char *str)
 {
-	int	num;
-	int	i;
-	int	minus;
+	long int	num;
+	int			i;
+	int			minus;
 
 	minus = 0;
 	num = 0;
@@ -30,15 +31,15 @@ static int	ft_atoi(const char *str)
 	i--;
 	while (str[++i] >= '0' && str[i] <= '9')
 	{
-		if (num * 10 < 0 && minus)
-			return (0);
-		if (num * 10 < 0)
-			return (-1);
 		num = num * 10 + str[i] - '0';
+		if ((minus && - num < INT_MIN) || (!minus && num > INT_MAX))
+			exit(display_error());
 	}
 	if (minus)
-		return (-num);
-	return (num);
+		return ((int)(-num));
+	if (str[i] != '\0')
+		exit(display_error());
+	return ((int)(num));
 }
 
 t_stacks	*create_stacks(int size, char **numbers)
@@ -61,7 +62,11 @@ t_stacks	*create_stacks(int size, char **numbers)
 		return (0);
 	i = -1;
 	while (++i < size)
+	{
+		if (numbers[i + 1][0] == '\0')
+			exit(display_error());
 		stack->a[i] = ft_atoi(numbers[i + 1]);
+	}
 	return (stack);
 }
 
