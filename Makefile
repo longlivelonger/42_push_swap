@@ -1,7 +1,7 @@
 NAME = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = push_swap.c input.c utils.c sort_utils.c \
 		minisort.c bigsort.c operations.c operations2.c \
